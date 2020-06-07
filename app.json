@@ -1,0 +1,17 @@
+{
+  "name": "reactNativePingPong",
+  "displayName": "reactNativePingPong",
+  "expo": {
+    "name": "reactNativePingPong",
+    "slug": "reactNativePingPong",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
