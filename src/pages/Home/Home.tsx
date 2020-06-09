@@ -1,32 +1,46 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { StateModel } from '../../reducers';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { setFirstPlayerName, setSecondPlayerName } from '../../actions';
 import { connect } from 'react-redux';
 
-interface HomeProps {
+interface HomeProps extends StateModel {
     navigation: any,
     setFirstPlayerName: Function,
     setSecondPlayerName: Function,
 }
 
-export function Home({ navigation, setFirstPlayerName, setSecondPlayerName }: HomeProps) {
+export function Home({ navigation, firstPlayer, secondPlayer, setFirstPlayerName, setSecondPlayerName }: HomeProps) {
+
+    /* Reseting player names each time user starts a new game.
+       I could've done that in Tracking component, in onPress callback for the "New Game" button, 
+       but I wanted to show you that I can use hooks :D
+    */
+    useFocusEffect(
+        useCallback(() => {
+            setFirstPlayerName('');
+            setSecondPlayerName('');
+        }, [])
+    );
+
     return (
         <View style={styles.container}>
             <View style={styles.inputContainer} >
-                <Text>Players 1 name</Text>
+                <Text>Player 1 name</Text>
                 <TextInput
-                    style={{ height: 40 }}
+                    style={styles.textInput}
                     placeholder="Enter first player's name"
-                    defaultValue={""}
+                    value={firstPlayer.name}
                     onChangeText={(text: string) => setFirstPlayerName(text)}
                 />
             </View>
-            <View>
-                <Text>Players 1 name</Text>
+            <View style={styles.inputContainer}>
+                <Text>Player 2 name</Text>
                 <TextInput
-                    style={{ height: 40 }}
+                    style={styles.textInput}
                     placeholder="Enter first player's name"
-                    defaultValue={""}
+                    value={secondPlayer.name}
                     onChangeText={(text: string) => setSecondPlayerName(text)}
                 />
             </View>
@@ -45,6 +59,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    textInput: {
+        height: 40,
+        fontSize: 18
+    },
     button: {
         backgroundColor: "blue",
         padding: 20,
@@ -61,9 +79,16 @@ const styles = StyleSheet.create({
     },
 });
 
+const mapStateToProps = (state: StateModel) => {
+    return {
+        firstPlayer: state.firstPlayer,
+        secondPlayer: state.secondPlayer
+    }
+}
+
 const mapDispatchToProps = {
     setFirstPlayerName: setFirstPlayerName,
     setSecondPlayerName: setSecondPlayerName,
 }
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
