@@ -31,6 +31,12 @@ const Home: FC<HomeProps> = ({ navigation, firstPlayer, secondPlayer, setFirstPl
         }, [])
     );
 
+    function submit() {
+        if (firstPlayer.name.length === 0) alert(`First player's name must be at least 1 character long`);
+        else if (secondPlayer.name.length === 0) alert(`Second player's name must be at least 1 character long`);
+        else navigation.navigate('Tracking');
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.inputContainer} >
@@ -46,12 +52,12 @@ const Home: FC<HomeProps> = ({ navigation, firstPlayer, secondPlayer, setFirstPl
                 <Text>Player 2 name</Text>
                 <TextInput
                     style={styles.textInput}
-                    placeholder="Enter first player's name"
+                    placeholder="Enter second player's name"
                     value={secondPlayer.name}
                     onChangeText={(text: string) => setSecondPlayerName(text)}
                 />
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate('Tracking')} style={styles.button}>
+            <TouchableOpacity onPress={submit} style={styles.button}>
                 <Text style={styles.buttonText}>Continue</Text>
             </TouchableOpacity>
         </View>
