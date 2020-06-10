@@ -1,17 +1,24 @@
-import React, { useCallback } from 'react';
-import { StateModel } from '../../reducers';
-import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
-import { setFirstPlayerName, setSecondPlayerName } from '../../actions';
+import React, { useCallback, FC } from 'react';
 import { connect } from 'react-redux';
 
+import { RootStackParamList } from '../../types';
+
+import { StateModel } from '../../reducers';
+import { setFirstPlayerName, setSecondPlayerName } from '../../actions';
+
+import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>
+
 interface HomeProps extends StateModel {
-    navigation: any,
-    setFirstPlayerName: Function,
-    setSecondPlayerName: Function,
+    navigation: HomeScreenNavigationProp,
+    setFirstPlayerName: (firstPlayerName: string) => void,
+    setSecondPlayerName: (secondPlayerName: string) => void,
 }
 
-export function Home({ navigation, firstPlayer, secondPlayer, setFirstPlayerName, setSecondPlayerName }: HomeProps) {
+const Home: FC<HomeProps> = ({ navigation, firstPlayer, secondPlayer, setFirstPlayerName, setSecondPlayerName }: HomeProps) => {
 
     /* Reseting player names each time user starts a new game.
        I could've done that in Tracking component, in onPress callback for the "New Game" button, 

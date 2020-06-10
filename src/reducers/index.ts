@@ -1,4 +1,4 @@
-import { ActionTypes, setFirstPlayerName, setSecondPlayerName, RootAction } from '../actions';
+import { ActionTypes, RootAction } from '../actions';
 import { createReducer } from 'typesafe-actions';
 
 export interface StateModel {

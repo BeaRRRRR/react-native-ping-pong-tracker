@@ -1,16 +1,23 @@
-import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { StateModel } from '../../reducers';
-import { setFirstPlayerScore, setSecondPlayerScore } from '../../actions';
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
 
+import { RootStackParamList } from '../../types';
+
+import { StateModel } from '../../reducers';
+import { setFirstPlayerScore, setSecondPlayerScore } from '../../actions';
+
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type TrackingScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Tracking'>
+
 interface TrackingProps extends StateModel {
-    navigation: any,
-    setFirstPlayerScore: Function,
-    setSecondPlayerScore: Function
+    navigation: TrackingScreenNavigationProp,
+    setFirstPlayerScore: (firstPlayerScore: number) => void,
+    setSecondPlayerScore: (secondPlayerScore: number) => void
 }
 
-export function Tracking({ navigation, firstPlayer, secondPlayer, setSecondPlayerScore, setFirstPlayerScore }: TrackingProps) {
+const Tracking: FC<TrackingProps> = ({ navigation, firstPlayer, secondPlayer, setSecondPlayerScore, setFirstPlayerScore }: TrackingProps) => {
 
     function resetWins() {
         setFirstPlayerScore(0);

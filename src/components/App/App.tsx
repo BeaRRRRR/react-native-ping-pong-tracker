@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
+
+import { RootStackParamList } from '../../types';
 
 import { Provider } from 'react-redux';
 import store from '../../store';
-
-import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -11,9 +11,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../../pages/Home';
 import TrackingScreen from '../../pages/Tracking';
 
-const stack = createStackNavigator();
+const stack = createStackNavigator<RootStackParamList>();
 
-export default function App() {
+// FC stands for Functional Component
+const App: FC = () => {
     return (
         <Provider store={store}>
             <NavigationContainer>
@@ -25,3 +26,5 @@ export default function App() {
         </Provider>
     );
 }
+
+export default App;
