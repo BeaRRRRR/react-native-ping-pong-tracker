@@ -24,6 +24,11 @@ const Tracking: FC<TrackingProps> = ({ navigation, firstPlayer, secondPlayer, se
         setSecondPlayerScore(0);
     }
 
+    function newGame() {
+        resetWins();
+        navigation.navigate('Home');
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.playerContainer}>
@@ -85,7 +90,7 @@ const Tracking: FC<TrackingProps> = ({ navigation, firstPlayer, secondPlayer, se
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => navigation.navigate('Home')}
+                    onPress={newGame}
                 >
                     <Text style={styles.buttonText}>
                         New Game

@@ -28,6 +28,7 @@ const Home: FC<HomeProps> = ({ navigation, firstPlayer, secondPlayer, setFirstPl
         useCallback(() => {
             setFirstPlayerName('');
             setSecondPlayerName('');
+
         }, [])
     );
 
@@ -39,23 +40,27 @@ const Home: FC<HomeProps> = ({ navigation, firstPlayer, secondPlayer, setFirstPl
 
     return (
         <View style={styles.container}>
-            <View style={styles.inputContainer} >
-                <Text>Player 1 name</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Enter first player's name"
-                    value={firstPlayer.name}
-                    onChangeText={(text: string) => setFirstPlayerName(text)}
-                />
+            <View>
+                <View style={styles.inputContainer} >
+                    <Text>Player 1 name</Text>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder="Enter player 1 name "
+                        value={firstPlayer.name}
+                        onChangeText={(text: string) => setFirstPlayerName(text)}
+                    />
+                </View>
             </View>
-            <View style={styles.inputContainer}>
-                <Text>Player 2 name</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Enter second player's name"
-                    value={secondPlayer.name}
-                    onChangeText={(text: string) => setSecondPlayerName(text)}
-                />
+            <View>
+                <View style={styles.inputContainer}>
+                    <Text>Player 2 name</Text>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder="Enter player 1 name"
+                        value={secondPlayer.name}
+                        onChangeText={(text: string) => setSecondPlayerName(text)}
+                    />
+                </View>
             </View>
             <TouchableOpacity onPress={submit} style={styles.button}>
                 <Text style={styles.buttonText}>Continue</Text>
@@ -68,6 +73,7 @@ const Home: FC<HomeProps> = ({ navigation, firstPlayer, secondPlayer, setFirstPl
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        flexDirection: 'column',
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',

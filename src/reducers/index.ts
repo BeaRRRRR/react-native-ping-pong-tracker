@@ -49,20 +49,22 @@ export const rootReducer = createReducer(initialState)
         }
     })
     .handleType(ActionTypes.SET_FIRST_PLAYER_SCORE, (state: StateModel, action: RootAction) => {
+        const score = action.payload >= 0 ? action.payload : state.firstPlayer.score;
         return {
             ...state,
             firstPlayer: {
                 ...state.firstPlayer,
-                score: action.payload
+                score,
             }
         }
     })
     .handleType(ActionTypes.SET_SECOND_PLAYER_SCORE, (state: StateModel, action: RootAction) => {
+        const score = action.payload >= 0 ? action.payload : state.secondPlayer.score;
         return {
             ...state,
             secondPlayer: {
                 ...state.secondPlayer,
-                score: action.payload
+                score
             }
         }
     });
